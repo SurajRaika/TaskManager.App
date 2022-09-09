@@ -14,7 +14,6 @@ const storeTodo = useTodoStore();
       <TopBar ></TopBar>
       <Content />
     </div>
-    
   </div>
 
 
