@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+
+.bg-Orange , .highlight{
+    @apply bg-orange-400
+}
+
+.bg-darkBlue {
+    background-color: #041955;
+}
+
+.bg-LightBlue , .Content-bg{
+    background-color: #3450A1;
+}
+
+.ScrollStyle_Router::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.ScrollStyle_Router::-webkit-scrollbar-thumb {
+    @apply bg-blue-600 ;
+}
+
+.ScrollStyle_Router::-webkit-scrollbar-thumb:hover {
+    /* background: #041955; */
+    @apply bg-blue-200 ;
+}
+
+.ScrollStyle_Router::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+}
