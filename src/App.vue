@@ -14,6 +14,7 @@ setInterval(() => {
   if (storeTodo.TodoData.TodoList.length) {
     if (new Date().getTime() > storeTodo.TodoData.TodoList[0].end_time) {
       Notify(storeTodo.TodoData.TodoList[0])
+      console.log("add ");
       storeTodo.AddTimeoutList(storeTodo.TodoData.TodoList[0].end_time)
     }
   }

@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { useTodoStore } from "../stores/TodoLocalData";
 import { useLayoutStore } from "../stores/Layout";
-import TimeoutBox from "../components/timeoutBox.vue";
 
 const storeLayout = useLayoutStore();
 const storeTodo = useTodoStore();
@@ -16,7 +15,7 @@ const timeLeft = ref('')
 
 
 
- 
+
 setInterval(() => {
   if (storeTodo.TodoData.TodoList[0]) {
     timeLeft.value = storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000))
@@ -37,8 +36,11 @@ setInterval(() => {
     <!-- Title and timeleft -->
     <div class="w-full  flex  items-center justify-between">
       <span class="flex gap-2 items-center">
-        <input class="checkBox" @mouseout="storeTodo.save()" type="checkbox"
-          v-model="storeTodo.TodoData.TodoList[0].completed" name="" id="">
+
+        <input :checked="storeTodo.TodoData.TodoList[0].completed"
+          @click="storeTodo.TodoData.TodoList[0].completed=!storeTodo.TodoData.TodoList[0].completed; storeTodo.save(); storeTodo.TodoData.TodoList[0].Last_Modification_At=new Date().getTime();"
+          type="checkbox">
+
         <h1 class="  font-semibold   text-xl lg:text-3xl text-darkBlue">{{storeTodo.TodoData.TodoList[0].Title}}</h1>
       </span>
       <h1 class="text-xl font-semibold text-center lg:text-3xl lg:font-bold">{{timeLeft.num}} <span
@@ -83,7 +85,9 @@ setInterval(() => {
         <!-- 1st -->
         <div class=" flex justify-between w-full items-center">
           <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
-            <input @mouseout="storeTodo.save()" type="checkbox" v-model="task.completed" name="" id="">
+            <input :checked="task.completed"
+              @click="task.completed=!task.completed; storeTodo.save(); task.Last_Modification_At=new Date().getTime();"
+              type="checkbox">
             <h1>{{task.Title}}</h1>
           </span>
           <!-- category -->
@@ -96,25 +100,68 @@ setInterval(() => {
           {{task.description}}
         </div>
         <!-- 3rd -->
-        <div class=" float-right   font-medium text-blue-500">
-          <span>
-            {{storeLayout.Gettime(task.end_time)}}
-          </span>
-        </div>
+        <div class="   w-full  font-medium text-blue-500">
+        <span class="float-right">
+          {{storeLayout.Gettime(task.start_time)}}
+        </span>
+        <span class="float-left  text-green-600">
+          <!-- <TimeoutBox :Expected_time="task.end_time" ></TimeoutBox> -->
+          {{(timeO=storeLayout.toDaysMinutesSeconds(Math.floor((   new Date(task.end_time) - new Date().getTime()) / 1000))).num}}
+          {{timeO.unit}}
+        </span>
+      </div>
       </span>
     </div>
 
-<!-- Timeout  -->
-    <div class="  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
-      <span class="border-4  border-darkBlue  rounded-md  background-lightBlue  p-2
-w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task">
-        <TimeoutBox :task="task" ></TimeoutBox>
-      </span>
 
-    </div>
     <span class="  text-sm opacity-80 " v-if="!storeTodo.TodoData.TodoList[0]">Wating For Remaing Task . . . . </span>
   </div>
 
+
+
+
+
+
+
+
+
+
+  <h2 class=" text-lg font-semibold">Tasks Which Exceeded the Expected time set by you guys </h2>
+  <div class="  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
+    <span class="border-4  border-darkBlue  rounded-md  background-lightBlue  p-2
+w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task">
+{{storeTodo.TodoData.TimeoutList.length}}asdas
+
+      <div class=" flex justify-between w-full items-center">
+        <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
+          <input :checked="task.completed" @click="task.completed=!task.completed; storeTodo.save();" type="checkbox">
+          <h1>{{task.Title}}</h1>
+        </span>
+        <!-- category -->
+        <span class=" px-1 border-orange-500   rounded-md font-bold bg-orange-500 ">
+          {{task.Category}}
+        </span>
+      </div>
+      <!-- 2nd -->
+      <div class=" truncate  mx-2 opacity-50">
+        {{task.description}}
+      </div>
+      <!-- 3rd -->
+      <div class="   w-full  font-medium text-blue-500">
+        <span class="float-right">
+          {{storeLayout.Gettime(task.start_time)}}
+        </span>
+        <span class="float-left  text-red-600">
+          <!-- <TimeoutBox :Expected_time="task.end_time" ></TimeoutBox> -->
+          <span class="text-xl font-black">-</span>
+          {{(timeO=storeLayout.toDaysMinutesSeconds(Math.floor(( new
+          Date().getTime() - new Date(task.end_time)) / 1000))).num}}
+          {{timeO.unit}}
+        </span>
+      </div>
+    </span>
+
+  </div>
 
 
 

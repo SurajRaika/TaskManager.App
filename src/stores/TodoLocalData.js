@@ -23,14 +23,18 @@ export const useTodoStore = defineStore({
       localStorage.setItem("Todo_LocalData", JSON.stringify(this.TodoData));
     },
     AddCategory(Category) {
+      console.log('welcome cate');
       if (!this.TodoData.categories.includes(Category)) {
+        console.log('categories is not included');
         this.TodoData.categories.unshift(Category);
       } else {
         for (let i = 0; i < this.TodoData.categories.length; i++) {
+          console.log('categories is  included');
           const element = this.TodoData.categories[i];
           if (element.toLowerCase() === Category.toLowerCase()) {
             this.TodoData.categories = removeItemFromArray(this.TodoData.categories, i)
             this.TodoData.categories.unshift(Category);
+            break
           }
 
         }
@@ -38,7 +42,9 @@ export const useTodoStore = defineStore({
       localStorage.setItem("Todo_LocalData", JSON.stringify(this.TodoData));
     },
     AddTimeoutList() {
-      this.TodoData.TimeoutList.push(this.TodoData.TodoList[0])
+      this.TodoData.TimeoutList.unshift(this.TodoData.TodoList[0])
+      // this.TodoData.TimeoutList = BinaryInsert(this.TodoData.TimeoutList, this.TodoData.TodoList[0], 0, this.TodoData.TimeoutList.length - 1);
+
       this.TodoData.TodoList.splice(0, 1)
       localStorage.setItem("Todo_LocalData", JSON.stringify(this.TodoData));
     },
@@ -64,8 +70,8 @@ export const useTodoStore = defineStore({
       let T_Task = 0;
 
 
-      let T_Completed=0;
-      let T_InCompleted=0;
+      let T_Completed = 0;
+      let T_InCompleted = 0;
 
 
       let T_Time_Exceeded = 0;
