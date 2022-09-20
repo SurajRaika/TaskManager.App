@@ -49,7 +49,7 @@
     return LastDays
   }
 
-
+ 
   // Data For graph 1
   //  Recent Last 
   // console.log(GetLast7Days());
@@ -81,8 +81,6 @@
     
   </script>
   <template>
-  <BarChart></BarChart>
-  <BarChart2></BarChart2>
   </template>
 
   <style>

@@ -15,13 +15,13 @@ export const useLayoutStore = defineStore({
             const mounth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
             let time = `${new Date(TotalSec).getHours()}:${new Date(TotalSec).getMinutes()}`
           
-            if (new Date().getDate() === new Date(TotalSec).getDate()) {
+            if (getFullDate() === getFullDate(TotalSec)) {
               return `Today, ${time}`
             }
-            if (new Date().getDate() === new Date(TotalSec).getDate() - 1) {
+            if (getFullDate() === getFullDate(TotalSec - 24 * 60 * 60 * 1000)) {
               return `Tomorrow, ${time}`
             }
-            if (new Date().getDate() === new Date(TotalSec).getDate() + 1) {
+            if (getFullDate() === getFullDate(TotalSec + 24 * 60 * 60 * 1000)) {
               return `Yesterday, ${time}`
             }
             return `${new Date(TotalSec).getDate()} ${mounth[new Date(TotalSec).getMonth()]}, ${time}`
@@ -50,3 +50,10 @@ export const useLayoutStore = defineStore({
           }
     }
 });
+
+
+
+function getFullDate(Sec=new Date().getTime()){
+  const GetDateObj=new Date(Sec);
+  return `${GetDateObj.getDate()}-${GetDateObj.getMonth() + 1}-${GetDateObj.getFullYear()}`
+}
