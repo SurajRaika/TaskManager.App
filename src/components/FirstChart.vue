@@ -4,6 +4,11 @@ import { onMounted, ref, computed } from 'vue'
 import { useTodoStore } from '../stores/TodoLocalData';
 
 
+
+
+
+
+
 // SortBy Button Varible
 const Drop = ref(false);
 const SortBy = ref('')
@@ -44,6 +49,11 @@ function Get_Nth_Last_Dates(No_Previous_day = 0) {
     return getFullDate(new Date().getTime() - 24 * 60 * 60 * 1000 * No_Previous_day);
 }
 
+
+
+//  Sort By Data 4
+
+// Recent Week
 function GetLast7Days(days = 7) {
     const LastDays = []
 
@@ -53,17 +63,21 @@ function GetLast7Days(days = 7) {
     return LastDays.reverse()
 }
 
+// Top  Day Created By 
+const keysSortedByTotal = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[a].Total - GroupByDate[b].Total })
+
+console.log(keysSortedByTotal);
 
 
 
 
 
 
-const DataLastWeek = function (days = 7) {
+let Extract_Data_from_Gp_by_date_using_input_list = function (List) {
     var GroupByDateCopy = GroupByDate
     console.log(GroupByDateCopy);
     var list = [];
-    var lastWeekDates = GetLast7Days(days)
+    var lastWeekDates = List
     for (let i = 0; i < lastWeekDates.length; i++) {
         const element = lastWeekDates[i];
         console.log(element);
@@ -74,26 +88,27 @@ const DataLastWeek = function (days = 7) {
         }
 
     }
-    return list.reverse()
+    return list
 }
 
-
+const LabelsList = ref([]);
 const data = computed(() => {
     if (SortBy === 'Recent') {
-        console.log("week");
-        return DataLastWeek();
+        return Extract_Data_from_Gp_by_date_using_input_list(GetLast7Days());
+        LabelsList.value = GetLast7Days();
     } else if (SortBy === 'Created') {
         console.log('created');
+        return Extract_Data_from_Gp_by_date_using_input_list(keysSortedByTotal);
+        LabelsList.value = keysSortedByTotal;
     }
-    return DataLastWeek();
-
+    return Extract_Data_from_Gp_by_date_using_input_list(GetLast7Days());
+    LabelsList.value = GetLast7Days();
 });
 
 
 
 
 
-console.log("DataGp", DataLastWeek());
 console.log(GetLast7Days());
 
 // const data = [{ x: 'Jan', net: 100, cogs: 50, gm: 50 }, { x: 'Feb', net: 120, cogs: 55, gm: 75 }];
@@ -108,7 +123,7 @@ onMounted(() => {
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: GetLast7Days(),
+            labels: LabelsList.value,
             datasets: [{
                 label: 'Total Task',
                 data: data.value,
@@ -163,13 +178,13 @@ onMounted(() => {
                     <div class="py-1" role="none">
                         <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                         <a class=" cursor-pointer text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                            @click="Drop=false;ShortBy='Recent'" id="menu-item-0">Recent Week</a>
+                            @click="Drop=false;SortBy='Recent'" id="menu-item-0">Recent Week</a>
                         <a class=" cursor-pointer text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                            @click="Drop=false;ShortBy='Created'" id="menu-item-1">Top Created</a>
+                            @click="Drop=false;SortBy='Created'" id="menu-item-1">Top Created</a>
                         <a class=" cursor-pointer text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                            @click="Drop=false;ShortBy='Completed'" id="menu-item-2">Top Completed</a>
+                            @click="Drop=false;SortBy='Completed'" id="menu-item-2">Top Completed</a>
                         <a class=" cursor-pointer text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                            @click="Drop=false;ShortBy='InCompleted'" id="menu-item-2">Top InCompleted</a>
+                            @click="Drop=false;SortBy='InCompleted'" id="menu-item-2">Top InCompleted</a>
 
                     </div>
                 </div>

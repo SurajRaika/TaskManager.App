@@ -74,7 +74,7 @@ const DataLastWeek = function () {
 console.log(DataLastWeek());
 // Data For Graph2
 // Top Days By Created
-var keysSortedByTotal = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[a].Total - GroupByDate[b].Total })
+const keysSortedByTotal = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[a].Total - GroupByDate[b].Total })
 // console.log(keysSortedByTotal);
 
 
