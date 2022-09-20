@@ -62,6 +62,11 @@ background-color: #0E2D86;
 
 
 
+.h-screen-half{
+  width: 50vh;
+}
+
+
 .bg-LightBlue , .Content-bg{
     /* background-color: #3450A1; */
     @apply bg-blue-700
