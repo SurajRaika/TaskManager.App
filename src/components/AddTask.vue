@@ -3,7 +3,7 @@ import { useLayoutStore } from "../stores/Layout";
 const storeLayout = useLayoutStore()
 </script>
 <template>
-        <div class=" fixed right-7 bottom-14 select-none">
+        <div class=" fixed right-7 bottom-14 select-none z-50">
 
                 <svg @click="storeLayout.ShowPopup()" class=" cursor-pointer w-14 h-14 stroke-1  stroke-orange-400 fill-transparent hover:stroke-0 hover:fill-orange-400 transition-all "
                 viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

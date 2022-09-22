@@ -47,7 +47,7 @@ function Get_Nth_Last_Dates(No_Previous_day = 0) {
     return getFullDate(new Date().getTime() - 24 * 60 * 60 * 1000 * No_Previous_day);
 }
 
-function Extract_Data_from_Gp_by_date_using_input_list (List) {
+function Extract_Data_from_Gp_by_date_using_input_list(List) {
     var GroupByDateCopy = GroupByDate
     var list = [];
     var lastWeekDates = List
@@ -61,12 +61,12 @@ function Extract_Data_from_Gp_by_date_using_input_list (List) {
 
     }
     return list
-}   
+}
 
 
 
 //  Sort By Data 
-const GetLast7Days = function(days = 7) {
+const GetLast7Days = function (days = 7) {
     const LastDays = []
 
     for (let i = 0; i < days; i++) {
@@ -102,7 +102,7 @@ onMounted(() => {
     const ctx = document.getElementById('myChart');
     ctx.width = ctx.parentElement.offsetWidth;
     ctx.height = ctx.parentElement.offsetHeight;
-    Chart.defaults.color='white';
+    Chart.defaults.color = 'white';
 
     const myChart = new Chart(ctx, {
         type: 'bar',
@@ -115,7 +115,7 @@ onMounted(() => {
                     yAxisKey: 'Total'
                 },
                 backgroundColor: 'purple',
-                color:'#0bf8f8'
+                color: '#0bf8f8'
             }, {
                 label: 'Completed Task',
                 data: intialData,
@@ -123,7 +123,7 @@ onMounted(() => {
                     yAxisKey: 'Completed'
                 },
                 backgroundColor: 'blue',
-                color:'#0bf8f8'
+                color: '#0bf8f8'
             }, {
                 label: 'Pending Task',
                 data: intialData,
@@ -131,38 +131,47 @@ onMounted(() => {
                     yAxisKey: 'InCompleted'
                 },
                 backgroundColor: 'red',
-                
-                color:'#0bf8f8'
+
+                color: '#0bf8f8'
             }]
         },
-        options:{
-            responsive:true,
-            scales:{
-                y:{
-                    ticks:{color:'white',beginAtZero: true},
-                    
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    ticks: { color: 'white', beginAtZero: true },
+
                 },
-                x:{
-                    ticks:{color:'white',beginAtZero: true}
+                x: {
+                    ticks: { color: 'white', beginAtZero: true }
                 }
             },
             plugins: {
-            legend: {
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
-                        size: 14
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 14
+                        }
                     }
+                },
+                title: {
+                    display: true,
+                    text: 'Daily  Status',
+                    font: {
+                        size: 30,
+                        weight:'900'
+                    },
+                    color:'#041955'
                 }
             }
         }
-        }
     });
-    
-    
+
+
     watch(SortBy, async (newQuestion) => {
         if (SortBy.value === 'Recent') {
-           
+
 
             myChart.data.labels = GetLast7Days();
             myChart.data.datasets.forEach((dataset) => {
@@ -233,14 +242,17 @@ onMounted(() => {
                 </div>
             </div>
         </span>
-        <div clas="w-full h-60 sm:h-96">
-            <canvas id="myChart"></canvas>
+        <div class=" h-96" >
+
+            <div style=" width:100%; height: 100%;">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
 
 </template>
 <style>
-:root{
-    color:#0bf8f8;
+:root {
+    color: #0bf8f8;
 }
 </style>
