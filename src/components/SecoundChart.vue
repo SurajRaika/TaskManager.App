@@ -2,10 +2,7 @@
 import Chart from 'chart.js/auto';
 import { onMounted, ref, computed, watch } from 'vue'
 import { useTodoStore } from '../stores/TodoLocalData';
-
-
-
-
+import { useLayoutStore } from "../stores/Layout";
 
 
 
@@ -13,23 +10,31 @@ import { useTodoStore } from '../stores/TodoLocalData';
 const Drop = ref(false);
 const SortBy = ref('')
 const storeTodo = useTodoStore();
+const storeLayout = useLayoutStore();
 const allTask = storeTodo.TodoData.TodoList.concat(storeTodo.TodoData.TimeoutList)
 const GroupByDate = allTask.reduce((gpdate, task) => {
     const date = getFullDate(task.start_time)
     if (gpdate[date] == null) {
-        gpdate[date] = { Total: 0, Completed: 0, InCompleted: 0 }
+        gpdate[date] = {  Completed: 0, completed_time: 0,Expected_time:0 , AvgCompletedTime:0,AvgExpectedTime:0 }
     }
 
-    var NoInCompleted = 0;
-    var NoCompleted = 0;
+    var Completed = 0;
+    var completed_time=0;
+    var Expected_time=0;
     if (task.completed) {
-        NoCompleted = 1
+        Completed = 1;
+       if (task.Last_Modification_At) {
+	 completed_time=task.Last_Modification_At - task.start_time;
+}
+        Expected_time=task.end_time - task.start_time;
     }
-    else {
-        NoInCompleted = 1
-
-    }
-    gpdate[date] = { Total: gpdate[date].Total + 1, Completed: gpdate[date].Completed + NoCompleted, InCompleted: gpdate[date].InCompleted + NoInCompleted }
+   
+    gpdate[date] = { Completed: gpdate[date].Completed + Completed,
+         completed_time:gpdate[date].completed_time + completed_time ,
+          Expected_time:gpdate[date].Expected_time + Expected_time,
+          AvgCompletedTime:gpdate[date].completed_time/gpdate[date].Completed,
+          AvgExpectedTime:gpdate[date].Expected_time/gpdate[date].Completed,
+        }
 
     return gpdate
 }, {})
@@ -54,9 +59,13 @@ function Extract_Data_from_Gp_by_date_using_input_list (List) {
     for (let i = 0; i < lastWeekDates.length; i++) {
         const element = lastWeekDates[i];
         if (GroupByDateCopy[element]) {
-            list.push({ x: element, Total: GroupByDateCopy[element].Total, Completed: GroupByDateCopy[element].Completed, InCompleted: GroupByDateCopy[element].InCompleted })
+            list.push({ x: element, 
+                // storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000))
+                AvgCompletedTime: GroupByDateCopy[element].AvgCompletedTime
+                , Completed: GroupByDateCopy[element].Completed
+                , AvgExpectedTime: GroupByDateCopy[element].AvgExpectedTime })
         } else {
-            list.push({ x: element, Total: 0, Completed: 0, InCompleted: 0 })
+            list.push({ x: element, AvgCompletedTime: 0, Completed: 0, AvgExpectedTime: 0 })
         }
 
     }
@@ -74,14 +83,15 @@ const GetLast7Days = function(days = 7) {
     }
     return LastDays.reverse()
 }
-const keysSortedByTotal = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[b].Total - GroupByDate[a].Total })
 
 const keysSortedByCompleted = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[b].Completed - GroupByDate[a].Completed })
 
-const keysSortedByInCompleted = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[b].InCompleted - GroupByDate[a].InCompleted })
+const keysSortedByAvgCompleted = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[b].AvgCompletedTime - GroupByDate[a].AvgCompletedTime })
+
+const keysSortedByAvgExpected = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[b].AvgExpectedTime - GroupByDate[a].AvgExpectedTime })
 
 
-
+console.log(GroupByDate);
 
 
 
@@ -99,7 +109,7 @@ onMounted(() => {
     const intialData = Extract_Data_from_Gp_by_date_using_input_list(GetLast7Days());
     const intialLabelList = GetLast7Days();
 
-    const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('myChart2');
     ctx.width = ctx.parentElement.offsetWidth;
     ctx.height = ctx.parentElement.offsetHeight;
     Chart.defaults.color='white';
@@ -108,19 +118,11 @@ onMounted(() => {
         type: 'bar',
         data: {
             labels: intialLabelList,
-            datasets: [{
-                label: 'Total Task',
-                data: intialData,
-                parsing: {
-                    yAxisKey: 'Total'
-                },
-                backgroundColor: 'purple',
-                color:'#0bf8f8'
-            }, {
+            datasets: [ {
                 label: 'Completed Task',
                 data: intialData,
                 parsing: {
-                    yAxisKey: 'Completed'
+                    yAxisKey: 'AvgCompletedTime'
                 },
                 backgroundColor: 'blue',
                 color:'#0bf8f8'
@@ -128,7 +130,7 @@ onMounted(() => {
                 label: 'Pending Task',
                 data: intialData,
                 parsing: {
-                    yAxisKey: 'InCompleted'
+                    yAxisKey: 'AvgExpectedTime'
                 },
                 backgroundColor: 'red',
                 
@@ -160,38 +162,7 @@ onMounted(() => {
     });
     
     
-    watch(SortBy, async (newQuestion) => {
-        if (SortBy.value === 'Recent') {
-           
-
-            myChart.data.labels = GetLast7Days();
-            myChart.data.datasets.forEach((dataset) => {
-                dataset.data = Extract_Data_from_Gp_by_date_using_input_list(GetLast7Days());
-            });
-            myChart.update()
-
-        } else if (SortBy.value === 'Created') {
-            myChart.data.labels = keysSortedByTotal;
-            myChart.data.datasets.forEach((dataset) => {
-                dataset.data = Extract_Data_from_Gp_by_date_using_input_list(keysSortedByTotal);
-            });
-            myChart.update()
-        }
-        else if (SortBy.value === 'Completed') {
-            myChart.data.labels = keysSortedByCompleted;
-            myChart.data.datasets.forEach((dataset) => {
-                dataset.data = Extract_Data_from_Gp_by_date_using_input_list(keysSortedByCompleted);
-            });
-            myChart.update()
-        }
-        else {
-            myChart.data.labels = keysSortedByInCompleted;
-            myChart.data.datasets.forEach((dataset) => {
-                dataset.data = Extract_Data_from_Gp_by_date_using_input_list(keysSortedByInCompleted);
-            });
-            myChart.update()
-        }
-    })
+   
 })
 </script>
 <template>
@@ -234,7 +205,7 @@ onMounted(() => {
             </div>
         </span>
         <div clas="w-full h-60 sm:h-96">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart2"></canvas>
         </div>
     </div>
 
