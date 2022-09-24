@@ -1,5 +1,4 @@
 <script setup>
-import home from "./icons/home.vue";
 import Category from "./icons/Category.vue";
 import Todo from "./icons/Todo.vue";
 import analysis from "./icons/analysis.vue";
