@@ -105,10 +105,6 @@ const keysSortedByAvgCompleted = Object.keys(GroupByDate).sort(function (a, b) {
 const keysSortedByAvgExpected = Object.keys(GroupByDate).sort(function (a, b) { return GroupByDate[b].AvgExpectedTime - GroupByDate[a].AvgExpectedTime })
 
 
-console.log(GroupByDate);
-console.log(keysSortedByAvgExpected);
-console.log(ConvertToHour(2419336704));
-console.log(ConvertToHour(270136599));
 
 
 

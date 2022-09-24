@@ -14,7 +14,6 @@ setInterval(() => {
   if (storeTodo.TodoData.TodoList.length) {
     if (new Date().getTime() > storeTodo.TodoData.TodoList[0].end_time) {
       Notify(storeTodo.TodoData.TodoList[0])
-      console.log("add ");
       storeTodo.AddTimeoutList(storeTodo.TodoData.TodoList[0].end_time)
     }
   }
@@ -22,10 +21,8 @@ setInterval(() => {
 
 
 function Notify(About_Task) {
-  console.log("notify");
   Notification.requestPermission().then(perm => {
     if (perm === 'granted') {
-  console.log("ok granted");
 
       const notification = new Notification(About_Task.Title, {
         body: `TimeOut-${storeLayout.Gettime(About_Task.end_time)}`,

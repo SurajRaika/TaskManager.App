@@ -23,13 +23,10 @@ export const useTodoStore = defineStore({
       localStorage.setItem("Todo_LocalData", JSON.stringify(this.TodoData));
     },
     AddCategory(Category) {
-      console.log('welcome cate');
       if (!this.TodoData.categories.includes(Category)) {
-        console.log('categories is not included');
         this.TodoData.categories.unshift(Category);
       } else {
         for (let i = 0; i < this.TodoData.categories.length; i++) {
-          console.log('categories is  included');
           const element = this.TodoData.categories[i];
           if (element.toLowerCase() === Category.toLowerCase()) {
             this.TodoData.categories = removeItemFromArray(this.TodoData.categories, i)
@@ -59,7 +56,6 @@ export const useTodoStore = defineStore({
         if (!Categories.includes(task.Category)) {
           active += 1
           Categories.push(task.Category)
-          console.log(active);
         }
       });
       return { active: active, inactive: this.TodoData.categories.length - active }
@@ -79,7 +75,6 @@ export const useTodoStore = defineStore({
       let T_Time_Exceeded_InCompleted = 0;
 
       this.TodoData.TodoList.forEach(task => {
-        console.log(task.Category, Category);
         if (task.Category.toLowerCase() === Category.toLowerCase()) {
           T_Task += 1
           if (task.completed) {
@@ -150,7 +145,6 @@ let BinaryInsert = function (arr, x, start, end) {
     if (start > end) return false;
     let mid = Math.floor((start + end) / 2);
     if (arr[mid].end_time < x.end_time & arr[mid + 1].end_time > x.end_time) {
-      console.log(arr[mid].end_time, x.end_time, arr[mid + 1].end_time)
       arr.splice(mid + 1, 0, x)
       return arr
     };

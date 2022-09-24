@@ -23,7 +23,6 @@ const Data = allTask.reduce((gpdate, task) => {
 
     return gpdate
 }, [0, 0])
-// console.log(Data);
 
 
 
