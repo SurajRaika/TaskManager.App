@@ -8,7 +8,7 @@ import DownArroy from "./icons/DownArroy.vue";
 
 </script>
 <template>
-  <div class="px-3 w-full max-h-8 flex justify-between Content-bg ">
+  <div class="px-3 w-full max-h-8 flex justify-between  backdrop-blur-sx z-50 ">
     <div class="flex w-full h-full items-center">
       <span class="text-xl font-bold">Todo.app</span>
     </div>
