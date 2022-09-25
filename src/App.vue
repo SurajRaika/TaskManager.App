@@ -38,13 +38,13 @@ function Notify(About_Task) {
 
 <template>
   <!-- unscrollable  -->
-  <div class=" min-w-screen  min-h-screen  Content-bg lg:flex lg:flex-row-reverse  ">
+  <div id="Scrollable" class=" min-w-screen  min-h-screen  Content-bg lg:flex lg:flex-row-reverse  ">
     <!-- content -->
-    <div   class=" width_content">
+    <div    class=" width_content">
 
       <TopBar 
-        class=" width_content max-h-8 fixed top-0"></TopBar>
-      <div class="Content px-5  py-8  lg:pb-0 ">
+        class="header width_content max-h-8 fixed top-0"></TopBar>
+      <div class="Content   py-8  lg:pb-0 ">
         <Popup></Popup>
         <AddTask></AddTask>
         <router-view  ></router-view>
