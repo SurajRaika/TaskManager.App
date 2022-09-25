@@ -6,8 +6,9 @@ import { useLayoutStore } from "../stores/Layout";
 const storeLayout = useLayoutStore();
 const storeTodo = useTodoStore();
 
-const timeLeft = ref('')
-
+const timeLeft = ref({ num: 0, unit: '' })
+const timeLeftPersentage = ref(0)
+const HideUpcomingTask=ref(true)
 
 
 
@@ -19,6 +20,10 @@ const timeLeft = ref('')
 setInterval(() => {
   if (storeTodo.TodoData.TodoList[0]) {
     timeLeft.value = storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000))
+    const Total = storeTodo.TodoData.TodoList[0].end_time - storeTodo.TodoData.TodoList[0].start_time;
+    const timeCompleted = - new Date(storeTodo.TodoData.TodoList[0].start_time) + new Date().getTime(); // 
+    timeLeftPersentage.value = Math.floor((timeCompleted / Total) * 100)
+
   }
 }, 1000);
 
@@ -33,8 +38,8 @@ setInterval(() => {
 
     <h1 class="text-lg font-semibold">Upcoming Task</h1>
 
-    <div class="w-full sticky sticky-task top-7  z-10
-    flex flex-col 
+    <div class="w-full sticky sticky-task top-7  z-10  min-h-min 
+     
      border-4 border-darkBlue
                   background-lightBlue    p-3  lg:rounded-lg " v-if="storeTodo.TodoData.TodoList[0]">
       <!-- Title and timeleft -->
@@ -56,7 +61,7 @@ setInterval(() => {
         {{storeTodo.TodoData.TodoList[0].description}}
       </div>
       <!-- time limit info -->
-      <div class="w-full  flex  items-center justify-between font-bold  capitalize  text-blue-500 text-base">
+      <div v-show="HideUpcomingTask" :class="{'scale-0':HideUpcomingTask}" class="  w-full  flex  items-center justify-between font-bold  capitalize  text-blue-500 text-base">
 
         <span class="flex flex-col justify-center items-center">
           Created on
@@ -68,8 +73,12 @@ setInterval(() => {
         </span>
       </div>
       <!-- progress bar -->
-      <div class="w-full h-2 bg-blue-900 rounded-2xl">
+      <div class="w-full h-2 bg-blue-900 rounded-2xl overflow-hidden sticky top-4 ">
+        <span class=" bg-red-200 h-2  block  transition-all ease-linear duration-1000 " :style="`width:${timeLeftPersentage}%;`">
+          .
+        </span>
       </div>
+
     </div>
 
     <span class="  text-sm opacity-80 " v-if="!storeTodo.TodoData.TodoList[0]">Wating For Upcoming Task . . . . </span>

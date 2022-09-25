@@ -38,7 +38,7 @@ function Notify(About_Task) {
 
 <template>
   <!-- unscrollable  -->
-  <div id="Scrollable" class=" min-w-screen  min-h-screen overflow-hidden  Content-bg lg:flex lg:flex-row-reverse  ">
+  <div id="Scrollable" class=" min-w-screen  min-h-screen   Content-bg lg:flex lg:flex-row-reverse  ">
     <!-- content -->
     <div    class=" width_content">
 
