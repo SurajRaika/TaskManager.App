@@ -4,27 +4,34 @@
 
 
 
-body{
+body {
   /* width: 100vw; */
   height: 100vh;
   box-sizing: border-box;
 }
-
-:root{
-    --Topbar-width:3rem;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-:root{
-    --navbar-width:3rem;
-  }
-.router-link-active > svg{
-    @apply fill-orange-400;
+:root {
+  --Topbar-width: 3rem;
 }
-  
+
+:root {
+  --navbar-width: 3rem;
+}
+
+.router-link-active>svg {
+  @apply fill-orange-400;
+}
+
 
 @font-face {
-    font-family: CustomFont;
-    src: url(/NerkoOne-Regular.ttf);
+  font-family: CustomFont;
+  src: url(/NerkoOne-Regular.ttf);
 }
 
 
@@ -33,96 +40,110 @@ body{
 
 
 @media (min-width: 1024px) {
-    .TheNavbar {
-      width: var(--navbar-width);
-    }
-    .width_content {
-      width: calc(100% - var(--navbar-width));
-    }
+  .TheNavbar {
+    width: var(--navbar-width);
   }
 
-input,textarea{
-    border-radius: 0.25rem;
-    @apply  border active:border-blue-400 focus:outline-none focus:border-sky-100 focus:ring-sky-500 focus:ring-1 sm:text-sm
-    
+  .width_content {
+    width: calc(100% - var(--navbar-width));
+  }
 }
 
-.bg-Orange , .highlight{
-    @apply bg-orange-400
+input,
+textarea {
+  border-radius: 0.25rem;
+  @apply border active:border-blue-400 focus:outline-none focus:border-sky-100 focus:ring-sky-500 focus:ring-1 sm:text-sm
 }
 
-.bg-darkBlue , .navbar{
-    background-color: #041955;
+.bg-Orange,
+.highlight {
+  @apply bg-orange-400
 }
+
+.bg-darkBlue,
+.navbar {
+  background-color: #041955;
+}
+
 .border-darkBlue {
-    border-color: #041955;
+  border-color: #041955;
 }
+
 .text-darkBlue {
-    color: hwb(36deg 46% 0%);
+  color: hwb(36deg 46% 0%);
 }
+
 .background-lightBlue {
-    background-color: #041a55a1;
+  background-color: #041a55;
 }
 
 
-.bg-task-item{
-  background: rgb(2,0,36);
-  background: linear-gradient(60deg, rgba(2,0,36,0) 0%, rgba(4,25,85,0.87) 2%, rgba(14,45,134,1) 50%, rgba(14,45,134,0.85) 98%, rgba(20,201,241,0) 100%);}
-
-
-
-
-.sticky-task{
-background-color: #0E2D86;
+.bg-task-item {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(60deg, rgba(2, 0, 36, 0) 0%, rgba(4, 25, 85, 0.87) 2%, rgba(14, 45, 134, 1) 50%, rgba(14, 45, 134, 0.85) 98%, rgba(20, 201, 241, 0) 100%);
 }
 
 
 
-.h-screen-half{
+
+.sticky-task {
+  background-color: #0E2D86;
+}
+
+.transition-height {
+  transition: height 0.1s ease-in-out;
+
+}
+
+
+
+.h-screen-half {
   width: 50vh;
 }
 
 
 .bg-LightBlue {
-    /* background-color: #3450A1; */
-    @apply bg-blue-700
-}
-.Content-bg{
-
-  background: rgb(4,25,85);
-  background: linear-gradient(135deg, rgba(4,25,85,1) 0%, rgba(29,78,216,1) 17%, rgba(29,78,216,1) 51%, rgba(29,216,177,1) 98%, rgba(29,216,177,1) 100%);
+  /* background-color: #3450A1; */
+  @apply bg-blue-700
 }
 
-body::-webkit-scrollbar {
-    width: 0.5rem;
-    background-color: #3450A1;
+.Content-bg {
+
+  background: rgb(4, 25, 85);
+  background: linear-gradient(135deg, rgba(4, 25, 85, 1) 0%, rgba(29, 78, 216, 1) 17%, rgba(29, 78, 216, 1) 51%, rgba(29, 216, 177, 1) 98%, rgba(29, 216, 177, 1) 100%);
 }
 
-body::-webkit-scrollbar-thumb {
-    @apply bg-blue-600 ;
+#ScrollSection::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #3450A1;
 }
 
-body::-webkit-scrollbar-thumb:hover {
-    /* background: #041955; */
-    @apply bg-blue-200 ;
+#ScrollSection::-webkit-scrollbar-thumb {
+  @apply bg-blue-600;
 }
 
-body::-webkit-scrollbar-track {
-    /* box-shadow: inset 0 0 5px rgb(0, 0, 0); */
-    background: rgb(2,0,36);
-background: linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(1,0,255,1) 10%, rgba(1,0,255,1) 90%, rgba(20,201,241,0) 100%);
+#ScrollSection::-webkit-scrollbar-thumb:hover {
+  /* background: #041955; */
+  @apply bg-blue-200;
+}
+
+#ScrollSection::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px rgb(0, 0, 0); */
+  background: rgb(2, 0, 36);
+  background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(1, 0, 255, 1) 10%, rgba(1, 0, 255, 1) 90%, rgba(20, 201, 241, 0) 100%);
 }
 
 input[type="checkbox"] {
-    /* Add if not using autoprefixer */
-    -webkit-appearance: none;
-    appearance: none;
-    /* For iOS < 15 to remove gradient background */
-    background-color: #fff;
-    /* Not removed via appearance */
-    margin: 0;
-  }
-  input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+}
+
+input[type="checkbox"] {
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -135,60 +156,66 @@ input[type="checkbox"] {
   transform: translateY(-0.075em);
 }
 
-.form-control + .form-control {
+.form-control+.form-control {
   margin-top: 1em;
 }
+
 input[type="checkbox"] {
-    /* ...existing styles */
-  
-    display: grid;
-    place-content: center;
-  }
-  input[type="checkbox"]::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--form-control-color);
-  }
-  input[type="checkbox"] {
-    /* ...existing styles */
-    display: grid;
-    place-content: center;
-  }
-  
-  input[type="checkbox"]::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--form-control-color);
-  }
-  
-  input[type="checkbox"]:checked::before {
-    transform: scale(1);
-  }
-  input[type="checkbox"]::before {
-    /* ...existing styles */
-  
-    /* Windows High Contrast Mode */
-    background-color: CanvasText;
-  }
-  input[type="checkbox"]::before {
-    /* ...existing styles */
-  
-    transform-origin: bottom left;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  }
-  :root {
-    --form-control-disabled: #959495;
-  }
-  
-  input[type="checkbox"]:disabled {
-    --form-control-color: var(--form-control-disabled);
-  
-    color: var(--form-control-disabled);
-    cursor: not-allowed;
-  }
+  /* ...existing styles */
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"] {
+  /* ...existing styles */
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]::before {
+  /* ...existing styles */
+
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]::before {
+  /* ...existing styles */
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+:root {
+  --form-control-disabled: #959495;
+}
+
+input[type="checkbox"]:disabled {
+  --form-control-color: var(--form-control-disabled);
+
+  color: var(--form-control-disabled);
+  cursor: not-allowed;
+}

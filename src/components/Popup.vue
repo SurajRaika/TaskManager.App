@@ -52,7 +52,7 @@ function GetCategory(params) {
 <template >
   <Teleport to="body">
     <div id="Popup" @click.self="storeLayout.HidePopup()"
-      class="backdrop-blur-sx fixed top-0 left-0  w-full h-screen  z-10  flex justify-center items-center "
+      class="backdrop-blur-sx fixed top-0 left-0  w-full h-screen   z-50  flex justify-center items-center "
       v-show="storeLayout.Popup">
 
 

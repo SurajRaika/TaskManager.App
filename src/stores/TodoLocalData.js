@@ -106,6 +106,18 @@ export const useTodoStore = defineStore({
         T_Time_Exceeded: T_Time_Exceeded, T_Time_Exceeded_Completed: T_Time_Exceeded_Completed, T_Time_Exceeded_InCompleted: T_Time_Exceeded_InCompleted
       }
 
+    }, DeleteTask(task, list = '') {
+      if (list === 'TodoList') {
+        if(this.TodoData.TodoList.includes(task)){
+          this.TodoData.TodoList.splice(this.TodoData.TodoList.indexOf(task),1)
+        }
+      }
+      else {
+        if(this.TodoData.TimeoutList.includes(task)){
+          this.TodoData.TimeoutList.splice(this.TodoData.TimeoutList.indexOf(task),1)
+        }
+      }
+      localStorage.setItem("Todo_LocalData", JSON.stringify(this.TodoData));
     }
 
   },

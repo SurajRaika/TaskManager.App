@@ -1,4 +1,5 @@
 <script setup>
+  
 import TheNavbar from "./components/TheNavbar.vue";
 import TopBar from "./components/TopBar.vue";
 import { useTodoStore } from "./stores/TodoLocalData";
@@ -38,7 +39,7 @@ function Notify(About_Task) {
 
 <template>
   <!-- unscrollable  -->
-  <div id="Scrollable" class=" min-w-screen  min-h-screen   Content-bg lg:flex lg:flex-row-reverse  ">
+  <div  class=" min-w-screen  min-h-screen   Content-bg lg:flex lg:flex-row-reverse  ">
     <!-- content -->
     <div    class=" width_content">
 
@@ -47,7 +48,7 @@ function Notify(About_Task) {
       <div class="Content   py-8  lg:pb-0 ">
         <Popup></Popup>
         <AddTask></AddTask>
-        <router-view  ></router-view>
+        <router-view id="ScrollSection" class=" overflow-y-scroll  h-screen" ></router-view>
       </div>
 
     </div>
