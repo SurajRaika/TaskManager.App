@@ -160,7 +160,7 @@ setInterval(() => {
       <div class=" RemaingTaskItem mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TodoList[0]">
 
 
-        
+
         <span class="taskItem      border-darkBlue  rounded-sm  bg-task-item  p-2 w-full h-fit  sm:w-96"
           v-for="task in storeTodo.TodoData.TodoList" :id="task">
           <!-- 1st -->
@@ -215,9 +215,9 @@ setInterval(() => {
 
 
     <!-- remainig Task -->
-    <div class="RemaingTaskItem  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
+    <div class="RemaingTaskItem  mt-1  grid grid-cols-1 sm:grid-cols-2  lg:flex lg:flex-wrap  gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
       <span class="taskItem    rounded-sm  bg-task-item  p-2
-w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="!task.completed">
+w-full h-fit lg:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="!task.completed">
 
         <div class="relative flex justify-between w-full items-center">
           <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
