@@ -15,25 +15,8 @@ const HideUpcomingTask = ref(true)
 
 
 
-
-
-
-
-
-setInterval(() => {
-  if (storeTodo.TodoData.TodoList[0]) {
-    timeLeft.value = storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000)) || { num: 0, unit: '' }
-    const Total = storeTodo.TodoData.TodoList[0].end_time - storeTodo.TodoData.TodoList[0].start_time;
-    const timeCompleted = - new Date(storeTodo.TodoData.TodoList[0].start_time) + new Date().getTime(); // 
-    timeLeftPersentage.value = Math.floor((timeCompleted / Total) * 100)
-
-  }
-}, 1000);
-
-
-
-
-document.addEventListener("DOMContentLoaded", function (e) {
+onMounted(() => {
+  console.log('mounted');
   var PreviousClickedTask = null;
   var AllTask = document.getElementsByClassName('taskItem')
   Array.prototype.forEach.call(AllTask, task => {
@@ -67,7 +50,25 @@ document.addEventListener("DOMContentLoaded", function (e) {
       PreviousClickedTask = task
     }
   });
-});
+}),
+
+
+
+
+setInterval(() => {
+  if (storeTodo.TodoData.TodoList[0]) {
+    timeLeft.value = storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000)) || { num: 0, unit: '' }
+    const Total = storeTodo.TodoData.TodoList[0].end_time - storeTodo.TodoData.TodoList[0].start_time;
+    const timeCompleted = - new Date(storeTodo.TodoData.TodoList[0].start_time) + new Date().getTime(); // 
+    timeLeftPersentage.value = Math.floor((timeCompleted / Total) * 100)
+
+  }
+}, 1000);
+
+
+
+
+
 
 
 
