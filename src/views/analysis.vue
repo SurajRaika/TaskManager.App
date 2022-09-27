@@ -7,11 +7,15 @@ import PieChart from '../components/PieChart.vue';
 
 </script>
 <template>
+  <div class="p-3  md:p-14 pt-0 md:pt-0  ">
+
   <FirstChart class="my-5"></FirstChart>
   <div class=" Wrapper  lg:h-fit grid-flow-row lg:grid-flow-col gap-10 my-5 ">
     <PieChart class=" justify-self-center"></PieChart>
     <SecoundChart class="   justify-self-center w-full  h-full"></SecoundChart>
   </div>
+</div>
+
 </template>
 
 <style scoped>

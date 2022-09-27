@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useTodoStore } from "../stores/TodoLocalData";
 import { useLayoutStore } from "../stores/Layout";
 
@@ -8,7 +8,8 @@ import DeleteIcon from "../components/icons/DeleteIcon.vue";
 const storeLayout = useLayoutStore();
 const storeTodo = useTodoStore();
 
-const timeLeft = ref({ num: 0, unit: '' })
+const timeLeft = ref(0)
+
 const timeLeftPersentage = ref(0)
 const HideUpcomingTask = ref(true)
 
@@ -21,13 +22,54 @@ const HideUpcomingTask = ref(true)
 
 setInterval(() => {
   if (storeTodo.TodoData.TodoList[0]) {
-    timeLeft.value = storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000))
+    timeLeft.value = storeLayout.toDaysMinutesSeconds(Math.floor((new Date(storeTodo.TodoData.TodoList[0].end_time) - new Date().getTime()) / 1000)) || { num: 0, unit: '' }
     const Total = storeTodo.TodoData.TodoList[0].end_time - storeTodo.TodoData.TodoList[0].start_time;
     const timeCompleted = - new Date(storeTodo.TodoData.TodoList[0].start_time) + new Date().getTime(); // 
     timeLeftPersentage.value = Math.floor((timeCompleted / Total) * 100)
 
   }
 }, 1000);
+
+
+
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  var PreviousClickedTask = null;
+  var AllTask = document.getElementsByClassName('taskItem')
+  Array.prototype.forEach.call(AllTask, task => {
+
+    task.onclick = function () {
+      const firstRow = task.firstElementChild
+      const childlelements = firstRow.children
+      childlelements[1].classList.add("right-6");
+      childlelements[1].classList.remove("right-0");
+      childlelements[2].classList.add("right-0");
+      childlelements[2].classList.remove("-right-6");
+
+      setTimeout(() => {
+
+        const firstRow = task.firstElementChild
+        const childlelements = firstRow.children
+        childlelements[1].classList.remove("right-6");
+        childlelements[1].classList.add("right-0");
+        childlelements[2].classList.remove("right-0");
+        childlelements[2].classList.add("-right-6");
+      }, 3000);
+      if (PreviousClickedTask) {
+        const firstRow = PreviousClickedTask.firstElementChild
+        const childlelements = firstRow.children
+        childlelements[1].classList.remove("right-6");
+        childlelements[1].classList.add("right-0");
+        childlelements[2].classList.remove("right-0");
+        childlelements[2].classList.add("-right-6");
+      }
+
+      PreviousClickedTask = task
+    }
+  });
+});
+
+
 
 
 
@@ -115,12 +157,12 @@ setInterval(() => {
       <!-- wrapper  -->
       <h2 class=" text-xl font-bold">Remaing Tasks</h2>
       <div class=" RemaingTaskItem mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TodoList[0]">
-        <span class="  border-darkBlue  rounded-sm  bg-task-item  p-2 w-full h-fit  sm:w-96"
+        <span class="taskItem      border-darkBlue  rounded-sm  bg-task-item  p-2 w-full h-fit  sm:w-96"
           v-for="task in storeTodo.TodoData.TodoList" :id="task">
           <!-- 1st -->
 
           <div class=" flex justify-between w-full items-center relative">
-            <span   class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
+            <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
               <input :checked="task.completed"
                 @click="task.completed=!task.completed; storeTodo.save(); task.Last_Modification_At=new Date().getTime();"
                 type="checkbox">
@@ -153,6 +195,7 @@ setInterval(() => {
             </span>
           </div>
         </span>
+
       </div>
 
 
@@ -169,7 +212,7 @@ setInterval(() => {
 
     <!-- remainig Task -->
     <div class="RemaingTaskItem  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
-      <span class="  rounded-sm  bg-task-item  p-2
+      <span class="taskItem    rounded-sm  bg-task-item  p-2
 w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="!task.completed">
 
         <div class="relative flex justify-between w-full items-center">
@@ -217,7 +260,7 @@ w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" 
 
     <h2 class="  text-xl font-bold  ">Completed Task</h2>
     <div class="RemaingTaskItem  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
-      <span class="  rounded-sm  bg-task-item  p-2
+      <span class="taskItem    rounded-sm  bg-task-item  p-2
 w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="task.completed">
 
         <div class="relative flex justify-between w-full items-center">
@@ -279,13 +322,12 @@ w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" 
 }
 
 
+
 .RemaingTaskItem :hover .Category {
-  /* background-color: aqua; */
   right: 1.5rem
 }
 
 .RemaingTaskItem :hover .Delete {
-  /* background-color: aqua; */
   right: 0rem
 }
 </style>
