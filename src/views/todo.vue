@@ -93,7 +93,7 @@ setInterval(() => {
     <!-- Popup Task / Upcoming Task -->
     <label class="text-xl font-bold" for="UpcomingTask">UpcomingTask</label>
     <div @click="HideUpcomingTask=!HideUpcomingTask" :class="[HideUpcomingTask ? 'h-20' : ' h-36']"
-      class="w-full p-3 rounded-sm  transition-height  sticky top-8   overflow-hidden background-lightBlue z-20"
+      class="w-full p-3 rounded-lg  transition-height  sticky top-8   overflow-hidden bg-PopupTask z-20"
       v-if="storeTodo.TodoData.TodoList[0]">
 
       <!-- title -->
@@ -158,6 +158,9 @@ setInterval(() => {
       <!-- wrapper  -->
       <h2 class=" text-xl font-bold">Remaing Tasks</h2>
       <div class=" RemaingTaskItem mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TodoList[0]">
+
+
+        
         <span class="taskItem      border-darkBlue  rounded-sm  bg-task-item  p-2 w-full h-fit  sm:w-96"
           v-for="task in storeTodo.TodoData.TodoList" :id="task">
           <!-- 1st -->

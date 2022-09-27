@@ -64,17 +64,25 @@ textarea {
   @apply bg-orange-400
 }
 
-.bg-darkBlue,
-.navbar {
-  background-color: #041955;
+
+.bg-PopupTask{
+  background: rgb(0,78,198);
+background: linear-gradient(322deg, rgba(0,78,198,1) 0%, rgba(36,32,147,1) 50%, rgba(13,18,196,1) 100%);
 }
+
+.bg-navbar{
+
+background: rgb(27,0,117);
+background: linear-gradient(104deg, rgba(27,0,117,1) 6%, rgba(0,61,193,1) 80%);
+}
+
 
 .border-darkBlue {
   border-color: #041955;
 }
 
 .text-darkBlue {
-  color: hwb(36deg 46% 0%);
+  color: #ffc875;
 }
 
 .background-lightBlue {
