@@ -165,7 +165,7 @@ setInterval(() => {
           v-for="task in storeTodo.TodoData.TodoList" :id="task">
           <!-- 1st -->
 
-          <div class=" flex justify-between w-full items-center relative">
+          <div class=" flex overflow-hidden justify-between w-full items-center relative">
             <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
               <input :checked="task.completed"
                 @click="task.completed=!task.completed; storeTodo.save(); task.Last_Modification_At=new Date().getTime();"
@@ -216,10 +216,10 @@ setInterval(() => {
 
     <!-- remainig Task -->
     <div class="RemaingTaskItem  mt-1  grid grid-cols-1 sm:grid-cols-2  lg:flex lg:flex-wrap  gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
-      <span class="taskItem startingAnimation    rounded-sm  bg-task-item  p-2
+      <span class="taskItem startingAnimation     rounded-sm  bg-task-item  p-2
 w-full h-fit lg:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="!task.completed">
 
-        <div class="relative flex justify-between w-full items-center">
+        <div class="relative overflow-hidden flex justify-between w-full items-center">
           <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
             <input :checked="task.completed" @click="task.completed=!task.completed; storeTodo.save();" type="checkbox">
             <h1>{{task.Title}}</h1>
@@ -267,7 +267,7 @@ w-full h-fit lg:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" 
       <span class="taskItem startingAnimation   rounded-sm  bg-task-item  p-2
 w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="task.completed">
 
-        <div class="relative flex justify-between w-full items-center">
+        <div class="relative overflow-hidden flex justify-between w-full items-center">
           <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
             <input :checked="task.completed" @click="task.completed=!task.completed; storeTodo.save();" type="checkbox">
             <h1>{{task.Title}}</h1>
