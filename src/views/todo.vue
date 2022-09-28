@@ -161,7 +161,7 @@ setInterval(() => {
 
 
 
-        <span class="taskItem      border-darkBlue  rounded-sm  bg-task-item  p-2 w-full h-fit  sm:w-96"
+        <span class="taskItem startingAnimation      border-darkBlue  rounded-sm  bg-task-item  p-2 w-full h-fit  sm:w-96"
           v-for="task in storeTodo.TodoData.TodoList" :id="task">
           <!-- 1st -->
 
@@ -216,7 +216,7 @@ setInterval(() => {
 
     <!-- remainig Task -->
     <div class="RemaingTaskItem  mt-1  grid grid-cols-1 sm:grid-cols-2  lg:flex lg:flex-wrap  gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
-      <span class="taskItem    rounded-sm  bg-task-item  p-2
+      <span class="taskItem startingAnimation    rounded-sm  bg-task-item  p-2
 w-full h-fit lg:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="!task.completed">
 
         <div class="relative flex justify-between w-full items-center">
@@ -263,8 +263,8 @@ w-full h-fit lg:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" 
 
 
     <h2 class="  text-xl font-bold  ">Completed Task</h2>
-    <div class="RemaingTaskItem  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
-      <span class="taskItem    rounded-sm  bg-task-item  p-2
+    <div class="  RemaingTaskItem  mt-1 flex  flex-wrap gap-3 mb-5" v-if="storeTodo.TodoData.TimeoutList[0]">
+      <span class="taskItem startingAnimation   rounded-sm  bg-task-item  p-2
 w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" v-show="task.completed">
 
         <div class="relative flex justify-between w-full items-center">
@@ -312,7 +312,24 @@ w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" 
 
 </template>
 
-<style>
+<style scoped>
+  @keyframes scaleUP {
+    0%{
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.startingAnimation{
+  animation: scaleUP  0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 1;
+}
+
+
 .font-style {
   font-family: CustomFont;
 }

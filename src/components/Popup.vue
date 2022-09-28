@@ -52,14 +52,14 @@ function GetCategory(params) {
 <template >
   <Teleport to="body">
     <div id="Popup" @click.self="storeLayout.HidePopup()"
-      class="backdrop-blur-sx fixed top-0 left-0  w-full h-screen   z-50  flex justify-center items-center "
-      v-show="storeLayout.Popup">
+      class=" startingAnimationOfWrapper backdrop-blur-sx fixed top-0 left-0  w-full h-screen   z-50  flex justify-center items-center "
+      v-show="storeLayout.Popup" >
 
 
 
-      <div class="PopupWidth bg-blue-800 flex flex-col items-center justify-center ">
+      <div class="PopupWidth startingAnimationOfPopup  bg-blue-800 flex flex-col items-center justify-center ">
         <!-- container -->
-        <div class="w-full lg:w-3/4 flex flex-col justify-center items-center gap-3">
+        <div class="w-full  lg:w-3/4 flex flex-col justify-center items-center gap-3">
           <!-- first row -->
           <div class="lg:flex gap-5 w-full">
             <span class="flex flex-col w-full ">
@@ -105,5 +105,20 @@ function GetCategory(params) {
   padding: 1rem;
 }
 
+@keyframes scaleUP {
+    0%{
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.startingAnimationOfWrapper{
+  animation: scaleUP  0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 1;
+}
 </style>
 
