@@ -1,5 +1,5 @@
 <script setup>
-  
+
 import TheNavbar from "./components/TheNavbar.vue";
 import TopBar from "./components/TopBar.vue";
 import { useTodoStore } from "./stores/TodoLocalData";
@@ -7,7 +7,7 @@ import AddTask from "./components/AddTask.vue";
 import Popup from "./components/Popup.vue";
 import { useLayoutStore } from "./stores/Layout";
 
-const storeLayout= useLayoutStore();
+const storeLayout = useLayoutStore();
 const storeTodo = useTodoStore();
 
 
@@ -27,9 +27,9 @@ function Notify(About_Task) {
 
       const notification = new Notification(About_Task.Title, {
         body: `TimeOut-${storeLayout.Gettime(About_Task.end_time)}`,
-        icon:"timeout-clock.png"
+        icon: "timeout-clock.png"
       })
-      notification.addEventListener('click',e=>{
+      notification.addEventListener('click', e => {
       })
     }
   })
@@ -41,20 +41,19 @@ function Notify(About_Task) {
 
 <template>
   <!-- unscrollable  -->
-  <div  class=" min-w-screen  min-h-screen   Content-bg lg:flex lg:flex-row-reverse  ">
+  <div class=" min-w-screen  min-h-screen   Content-bg lg:flex lg:flex-row-reverse  ">
     <!-- content -->
-    <div    class=" width_content">
+    <div class=" width_content">
 
-      <TopBar 
-        class="header width_content max-h-8 fixed top-0"></TopBar>
+      <TopBar class="header width_content max-h-8 fixed top-0"></TopBar>
       <div class="Content   py-8  lg:pb-0 ">
         <Popup></Popup>
         <AddTask></AddTask>
-        <router-view id="ScrollSection" class=" overflow-y-scroll  h-screen" ></router-view>
+        <router-view id="ScrollSection" class=" overflow-y-scroll  h-screen"></router-view>
       </div>
 
     </div>
-    <TheNavbar class=" TheNavbar  fixed   bottom-0  min-h-fit lg:top-0 lg:left-0"></TheNavbar>
+    <TheNavbar class=" "></TheNavbar>
   </div>
 
 
