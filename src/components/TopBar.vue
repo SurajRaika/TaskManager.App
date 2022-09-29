@@ -19,9 +19,9 @@ import DownArroy from "./icons/DownArroy.vue";
     <div class="flex w-fit     justify-around items-center h-full">
       <!-- <HelpLogoVue class="w-10"></HelpLogoVue> -->
       <!-- <Bell class="w-10"></Bell> -->
-      <span class="text-base  min-w-fit ">Suraj raika</span>
-      <DownArroy class="w-10 "></DownArroy>
-      <img class="h-5 rounded-full" src="../assets/profile-picture.webp" />
+      <!-- <span class="text-base  min-w-fit ">Suraj raika</span> -->
+      <!-- <DownArroy class="w-10 "></DownArroy> -->
+      <!-- <img class="h-5 rounded-full" src="../assets/profile-picture.webp" /> -->
     </div>
   </div>
 </template>

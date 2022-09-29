@@ -11,8 +11,6 @@ const storeTodo = useTodoStore();
   <div class="p-3  md:p-14 pt-0 md:pt-0  ">
 
   <h1 class="text-3xl font-bold font-serif ">Total Category: {{storeTodo.TodoData.categories.length}}</h1>
-  <h1> Active : {{storeTodo.CategoriesStatus().active}}</h1>
-  <h1> InActive : {{storeTodo.CategoriesStatus().inactive}}</h1>
 
   <h1 class="font-semibold text-lg">Categories</h1>
   <div class="flex flex-wrap gap-5 mb-5">

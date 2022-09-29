@@ -48,20 +48,7 @@ export const useTodoStore = defineStore({
     save() {
       localStorage.setItem("Todo_LocalData", JSON.stringify(this.TodoData));
     },
-    CategoriesStatus() {
-      let active = 0;
-      const Categories = [];
-
-      this.TodoData.TodoList.forEach(task => {
-        if (!Categories.includes(task.Category)) {
-          active += 1
-          Categories.push(task.Category)
-        }
-      });
-      return { active: active, inactive: this.TodoData.categories.length - active }
-
-
-    },
+    
     AboutCategory(Category) {
       let T_Task = 0;
 
