@@ -16,7 +16,7 @@ const storeTodo = useTodoStore();
 
   <h1 class="font-semibold text-lg">Categories</h1>
   <div class="flex flex-wrap gap-5 mb-5">
-    <span class="p-2 w-full sm:w-96 catrgoriesBox rounded-md flex flex-col" v-for="Category in storeTodo.TodoData.categories"
+    <span class=" startingAnimation p-2 w-full sm:w-96 catrgoriesBox rounded-md flex flex-col" v-for="Category in storeTodo.TodoData.categories"
       :id="Category">
       <!-- 1st row -->
       <div class="flex justify-between">

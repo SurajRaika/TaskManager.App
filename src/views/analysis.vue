@@ -1,7 +1,6 @@
 <script  setup>
 
 import FirstChart from '../components/FirstChart.vue';
-import SecoundChart from '../components/SecoundChart.vue';
 import PieChart from '../components/PieChart.vue';
 
 
@@ -12,7 +11,6 @@ import PieChart from '../components/PieChart.vue';
   <FirstChart class="my-5"></FirstChart>
   <div class=" Wrapper  lg:h-fit grid-flow-row lg:grid-flow-col gap-10 my-5 ">
     <PieChart class=" justify-self-center"></PieChart>
-    <SecoundChart class="   justify-self-center w-full  h-full"></SecoundChart>
   </div>
 </div>
 

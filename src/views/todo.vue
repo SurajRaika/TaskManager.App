@@ -101,7 +101,7 @@ setInterval(() => {
         <span class="flex gap-2 items-center">
 
           <input :checked="storeTodo.TodoData.TodoList[0].completed"
-            @click="storeTodo.TodoData.TodoList[0].completed=!storeTodo.TodoData.TodoList[0].completed; storeTodo.save();HideUpcomingTask=!HideUpcomingTask; storeTodo.TodoData.TodoList[0].Last_Modification_At=new Date().getTime();"
+            @click="storeTodo.TodoData.TodoList[0].completed=!storeTodo.TodoData.TodoList[0].completed; storeTodo.save();HideUpcomingTask=!HideUpcomingTask; "
             type="checkbox">
 
           <h1 class="  font-semibold   text-xl lg:text-3xl  text-purple-600 capitalize ">
@@ -168,7 +168,7 @@ setInterval(() => {
           <div class=" flex overflow-hidden justify-between w-full items-center relative">
             <span class=" flex items-center gap-2 text-lg font-semibold  text-blue-200">
               <input :checked="task.completed"
-                @click="task.completed=!task.completed; storeTodo.save(); task.Last_Modification_At=new Date().getTime();"
+                @click="task.completed=!task.completed; storeTodo.save(); "
                 type="checkbox">
               <h1>{{task.Title}}</h1>
             </span>
@@ -312,7 +312,7 @@ w-full h-fit sm:w-96" v-for="task in storeTodo.TodoData.TimeoutList" :id="task" 
 
 </template>
 
-<style scoped>
+<style >
   @keyframes scaleUP {
     0%{
       transform: scale(0);

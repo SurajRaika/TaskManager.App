@@ -4,9 +4,9 @@ export const useTodoStore = defineStore({
   id: "TodoData",
   state: () => ({
     TodoData: JSON.parse(localStorage.getItem("Todo_LocalData")) || {
-      categories: [],
-      TodoList: [],
-      TimeoutList: []
+      categories: ['courier 🧐','Computer Science 🖥','Health 💝'],
+      TodoList: [{Title:'CheckOut Full Application',Category:'courier 🧐',description:'I have To Check Out This Website So that I can Find out Skill OF Developer.',start_time:new Date().getTime() - 10000 ,end_time:new Date().getTime() + 600000 , completed:false }],
+      TimeoutList: [{Title:'Visit Task Manager Application',Category:'Computer Science 🖥',description:'I Hope This Website is Good Looking And Efficient',start_time:new Date().getTime() - 1000000 ,end_time:new Date().getTime() - 400000 , completed:true }]
     },
   }),
   getters: {

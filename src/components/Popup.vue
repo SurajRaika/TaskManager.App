@@ -27,7 +27,7 @@ function AddTask() {
       start_time: new Date().getTime(),
       end_time: (new Date(`${date.value} ${time.value}`)).getTime(),
       completed: false,
-      timeout: false
+      
     };
 
     storeTodo.AddCategory(Category.value)
