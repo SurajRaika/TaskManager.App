@@ -16,11 +16,11 @@ import DownArroy from "./icons/DownArroy.vue";
       <span class="text-xl font-bold">Todo.app</span>
     </div>
 
-    <div class="flex w-fit gap-1   justify-around items-center h-full">
-      <HelpLogoVue class="w-10"></HelpLogoVue>
-      <Bell class="w-10"></Bell>
-      <DownArroy class="w-10"></DownArroy>
+    <div class="flex w-fit     justify-around items-center h-full">
+      <!-- <HelpLogoVue class="w-10"></HelpLogoVue> -->
+      <!-- <Bell class="w-10"></Bell> -->
       <span class="text-base  min-w-fit ">Suraj raika</span>
+      <DownArroy class="w-10 "></DownArroy>
       <img class="h-5 rounded-full" src="../assets/profile-picture.webp" />
     </div>
   </div>

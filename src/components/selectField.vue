@@ -18,6 +18,9 @@ props:{
 
                 const element = this.categories[i];
                 if (element.toLowerCase().includes(this.Text.toLowerCase())) {
+                    if (array.length > 5) {
+                        break
+                    }
                     array.push(element);
 
                 };
@@ -56,8 +59,8 @@ props:{
             <input v-model="Text" id="categories" name="categories" placeholder="Category.."
                 @blur="ShowSuggestion = false" @focus.self="ShowSuggestion = true">
         </div>
-        <div class="suggestion" v-show="ShowSuggestion">
-            <span v-for="item in suggestion" class="sugg-box" @mousedown="Text = item">{{ item }}</span>
+        <div class="suggestion flex flex-col" v-show="ShowSuggestion">
+            <span v-for="item in suggestion" class=" block " :id='item' @mousedown="Text = item">{{ item }}</span>
         </div>
     </div>
 

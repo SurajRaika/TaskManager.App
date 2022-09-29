@@ -13,8 +13,10 @@ const storeTodo = useTodoStore();
 const Title = ref('');
 const Category = ref('');
 const Description = ref('');
-const date = ref('');
+const date = ref(getFullDate());
 const time = ref('');
+
+
 
 
 
@@ -46,24 +48,36 @@ function AddTask() {
 function GetCategory(params) {
   Category.value = params
 }
-
-
+function getFullDate(Sec = new Date().getTime()) {
+    var GetDateObj = new Date(Sec);
+    var year=GetDateObj.getFullYear()
+    var Mounth=GetDateObj.getMonth() + 1
+    var date=GetDateObj.getDate()
+    // console.log(Mounth);
+    if (Mounth<10) {
+      Mounth=`0${Mounth}`
+    }
+    if (date<10) {
+      date=`0${date}`
+    }
+    return `${year}-${Mounth}-${date}`
+}
 </script>
 <template >
   <Teleport to="body">
     <div id="Popup" @click.self="storeLayout.HidePopup()"
-      class=" startingAnimationOfWrapper backdrop-blur-sx fixed top-0 left-0  w-full h-screen   z-50  flex justify-center items-center "
+      class="  lg:backdrop-blur-sx fixed top-0 left-0  w-full h-screen   z-50  flex justify-center items-center "
       v-show="storeLayout.Popup" >
 
 
 
-      <div class="PopupWidth startingAnimationOfPopup  bg-blue-800 flex flex-col items-center justify-center ">
+      <div class="PopupWidth startingAnimationOfPopup  bg-Popup-Container flex flex-col items-center justify-center rounded-lg ">
         <!-- container -->
-        <div class="w-full  lg:w-3/4 flex flex-col justify-center items-center gap-3">
+        <div class="  font-semibold text-lg w-full  lg:w-3/4 flex flex-col justify-center items-center gap-3">
           <!-- first row -->
           <div class="lg:flex gap-5 w-full">
-            <span class="flex flex-col w-full ">
-              <Label for="Title">Title</Label>
+            <span class=" flex flex-col w-full ">
+              <Label class=" font-semibold" for="Title">Title</Label>
               <input v-model="Title" id="Title" class="w-full" type="text" placeholder="Title..">
             </span>
             <InputCategory class="w-full" @Category-Data="GetCategory"></InputCategory>
@@ -78,14 +92,14 @@ function GetCategory(params) {
           <!-- 3rd row -->
           <DIv class="w-full">
             <h1>Time Limit</h1>
-            <div class="flex w-full gap-1">
+            <div class=" text-base  font-medium  flex w-full gap-1">
               <span class="flex flex-col w-full">
                 <Label for="time">Time Limit</Label>
                 <input v-model="time" type="time" id="time">
               </span>
               <span class="flex flex-col w-full">
                 <Label for="date">Time Limit</Label>
-                <input v-model="date" type="date" id="date">
+                <input v-model="date" type="date" id="date" >
               </span>
             </div>
           </DIv>
@@ -117,8 +131,14 @@ function GetCategory(params) {
 }
 
 
-.startingAnimationOfWrapper{
+.startingAnimationOfPopup{
   animation: scaleUP  0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 1;
+}
+.bg-Popup-Container{
+  background: #457fca;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #5691c8, #457fca);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 </style>
 

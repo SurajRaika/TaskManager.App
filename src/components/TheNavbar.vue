@@ -15,7 +15,7 @@ const MenuToggle=ref(false)
     class="TheNavbar transition-all  fixed   bottom-0 w-full  z-40   min-h-fit lg:top-0 lg:left-0  h-10 bg-navbar px-2 flex items-center lg:h-full lg:items-start">
     <div
       class="flex flex-row w-full min-w-min justify-around items-center md:justify-center md:gap-x-5 lg:justify-between lg:flex-col lg:h-60">
-      <span @click="MenuToggle=!MenuToggle" class="w-full cursor-pointer hidden lg:flex lg:h-9 lg:items-center">
+      <span @click="MenuToggle=!MenuToggle" class="w-full cursor-pointer hidden lg:flex lg:h-9 lg:items-center ">
         <Menu></Menu>
       </span>
       <router-link :to="{name:'todo'}" class=" lg:flex    lg:w-full  lg:gap-3">
