@@ -112,7 +112,7 @@ function getFullDate(Sec = new Date().getTime()) {
   </Teleport>
 
 </template>
-<style>
+<style scoped>
 .PopupWidth {
   width: 50rem;
   max-width: 95%;
@@ -139,6 +139,9 @@ function getFullDate(Sec = new Date().getTime()) {
 background: -webkit-linear-gradient(to top, #5691c8, #457fca);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to top, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+*{
+  color: black;
 }
 </style>
 

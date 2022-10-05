@@ -118,7 +118,7 @@ setInterval(() => {
           {{storeTodo.TodoData.TodoList[0].description}}
         </div>
         <!-- time limit info -->
-        <div class="  w-full  flex  items-center justify-between font-bold  capitalize  text-blue-500 text-base">
+        <div class="  w-full  flex  items-center justify-between font-bold  capitalize   text-base">
 
           <span class="flex flex-col justify-center items-center">
             Created on
@@ -187,7 +187,7 @@ setInterval(() => {
             {{task.description}}
           </div>
           <!-- 3rd -->
-          <div class="   w-full  font-medium text-blue-500">
+          <div class="   w-full  font-medium ">
             <span class="float-right">
               {{storeLayout.Gettime(task.start_time)}}
             </span>
